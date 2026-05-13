@@ -1,0 +1,54 @@
+name: News Renaud Dekode
+description: Vérifie le flux RSS Renaud Dekode toutes les 30 minutes et notifie via Telegram s'il y a un nouvel article.
+steps:
+  - id: fetch_feed
+    tool: http_request
+    args:
+      url: https://renauddekode.substack.com/feed
+      method: GET
+      max_chars: 10000
+  - id: extract_article
+    tool: llm_extract
+    args:
+      text: '{{ steps.fetch_feed.text }}'
+      instruction: >-
+        Extrait le PREMIER <item> du flux RSS. Retourne un JSON avec : guid (contenu de <guid>), title (contenu de
+        <title>), link (contenu de <link>), pubDate (contenu de <pubDate>). Format : {"guid": "...", "title": "...",
+        "link": "...", "pubDate": "..."}
+  - id: check_new
+    tool: forge_get_global
+    args:
+      key: renaud_dekode_last_guid
+  - id: notify_if_new
+    tool: llm_call
+    if: steps.extract_article.guid != steps.check_new.value
+    args:
+      prompt: >-
+        RÉPONDS UNIQUEMENT par ce JSON et rien d'autre : {"action": "notify", "title": "{{ steps.extract_article.title
+        }}", "link": "{{ steps.extract_article.link }}"}
+      max_tokens: 200
+  - id: save_new_guid
+    tool: forge_set_global
+    if: steps.extract_article.guid != steps.check_new.value
+    args:
+      key: renaud_dekode_last_guid
+      value: '{{ steps.extract_article.guid }}'
+  - id: save_new_title
+    tool: forge_set_global
+    if: steps.extract_article.guid != steps.check_new.value
+    args:
+      key: renaud_dekode_last_title
+      value: '{{ steps.extract_article.title }}'
+  - id: send_telegram
+    tool: channel_send
+    if: steps.extract_article.guid != steps.check_new.value
+    args:
+      channel_id: a82e7eb8
+      message: |-
+        📰 **Nouvel article sur Renaud Dekode !**
+
+        **{{ steps.extract_article.title }}**
+        🔗 {{ steps.extract_article.link }}
+
+        📅 Publié le {{ steps.extract_article.pubDate }}
+      chat_id: '8407197856'
