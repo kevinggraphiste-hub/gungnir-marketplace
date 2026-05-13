@@ -1,0 +1,18 @@
+{
+  "name": "voice-hume",
+  "display_name": "Hume Octave TTS",
+  "version": "1.0.0",
+  "author": "ScarletWolf",
+  "description": "TTS expressif Hume Octave 2 (latence ~100ms, 11 langues, voix avec emotional intelligence). Voix par nom prédéfini ou description naturelle (ex 'warm young woman, conversational').",
+  "type": "voice",
+  "category": "voice",
+  "tags": ["tts", "premium", "expressive", "emotion"],
+  "icon": "Mic",
+  "min_gungnir_version": "4.0.0",
+  "permissions": {
+    "secrets": ["hume_api_key"],
+    "user_data": ["voice_config"],
+    "filesystem": ["data/plugins_external/voice-hume/"],
+    "network_egress": ["api.hume.ai", "*.hume.ai"]
+  }
+}

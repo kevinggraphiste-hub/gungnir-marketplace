@@ -1,6 +1,6 @@
 {
   "_comment": "Catalog officiel Gungnir Marketplace. Format consommé par /api/marketplace/catalog. Voir MARKETPLACE.md (repo Gungnir) pour la doc dev. RÈGLE STRICTE : tout plugin publié ici DOIT être pleinement fonctionnel — pas de stubs, pas de placeholders. Les plugins en cours de dev restent dans deploy/marketplace-seeds/ du repo Gungnir non publié, et passent dans ce catalog uniquement après QA.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "updated_at": "2026-05-13",
   "plugins": [
     {
@@ -25,6 +25,50 @@
       "downloads": 0,
       "rating": null,
       "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-cartesia/voice-cartesia-1.0.0.tar.gz"
+    },
+    {
+      "id": "voice-hume",
+      "name": "Hume Octave TTS",
+      "version": "1.0.0",
+      "author": "ScarletWolf",
+      "description": "TTS expressif Hume Octave 2 (latence ~100ms, 11 langues, voix avec emotional intelligence). Voix prédéfinies ou description naturelle (ex 'warm young woman, conversational').",
+      "type": "voice",
+      "category": "voice",
+      "tags": ["tts", "premium", "expressive", "emotion"],
+      "permissions": {
+        "secrets": ["hume_api_key"],
+        "user_data": ["voice_config"],
+        "filesystem": ["data/plugins_external/voice-hume/"],
+        "network_egress": ["api.hume.ai", "*.hume.ai"]
+      },
+      "verified": true,
+      "premium": true,
+      "min_gungnir_version": "4.0.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-hume/voice-hume-1.0.0.tar.gz"
+    },
+    {
+      "id": "voice-speechmatics",
+      "name": "Speechmatics STT",
+      "version": "1.0.0",
+      "author": "ScarletWolf",
+      "description": "STT Speechmatics (UK) — top qualité multilingue (35+ langues), batch async + diarization. Souverain UK/EU.",
+      "type": "voice",
+      "category": "voice",
+      "tags": ["stt", "uk", "souverain", "multilingual"],
+      "permissions": {
+        "secrets": ["speechmatics_api_key"],
+        "user_data": ["voice_config"],
+        "filesystem": ["data/plugins_external/voice-speechmatics/"],
+        "network_egress": ["asr.api.speechmatics.com", "*.speechmatics.com"]
+      },
+      "verified": true,
+      "premium": true,
+      "min_gungnir_version": "4.0.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-speechmatics/voice-speechmatics-1.0.0.tar.gz"
     }
   ]
 }

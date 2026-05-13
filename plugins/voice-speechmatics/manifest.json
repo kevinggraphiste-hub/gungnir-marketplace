@@ -1,0 +1,18 @@
+{
+  "name": "voice-speechmatics",
+  "display_name": "Speechmatics STT",
+  "version": "1.0.0",
+  "author": "ScarletWolf",
+  "description": "STT Speechmatics (UK) — top qualité multilingue (35+ langues), batch ou realtime. Souverain UK/EU.",
+  "type": "voice",
+  "category": "voice",
+  "tags": ["stt", "uk", "souverain", "multilingual"],
+  "icon": "Mic",
+  "min_gungnir_version": "4.0.0",
+  "permissions": {
+    "secrets": ["speechmatics_api_key"],
+    "user_data": ["voice_config"],
+    "filesystem": ["data/plugins_external/voice-speechmatics/"],
+    "network_egress": ["asr.api.speechmatics.com", "*.speechmatics.com"]
+  }
+}
