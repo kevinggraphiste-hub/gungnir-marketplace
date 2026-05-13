@@ -1,0 +1,109 @@
+name: Auto-review submitted plugin
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'plugins/**/manifest.json'
+      - 'plugins/**/workflow.yaml'
+      - 'plugins/**/signature.bin'
+      - 'plugins/**/routes.py'
+      - 'catalog.json'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: |
+          pip install --quiet pyyaml cryptography requests
+
+      - name: Detect changed plugin dirs
+        id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+          dirs=$(git diff --name-only "$base" "$head" -- 'plugins/*/manifest.json' 'plugins/*/workflow.yaml' 'plugins/*/signature.bin' 'plugins/*/routes.py' \
+                  | awk -F/ '{print $1"/"$2}' | sort -u)
+          echo "Changed plugin dirs:"
+          echo "$dirs"
+          echo "dirs<<EOF" >> $GITHUB_OUTPUT
+          echo "$dirs" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Run auto-review for each changed plugin
+        id: review
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          GUNGNIR_BASE_URL: https://gungnir.scarletwolf.cloud
+        run: |
+          set -e
+          dirs="${{ steps.changed.outputs.dirs }}"
+          if [ -z "$dirs" ]; then
+            echo "Aucun changement de plugin détecté — skip."
+            echo "verdict=skip" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          all_ok=true
+          report=""
+          while IFS= read -r d; do
+            [ -z "$d" ] && continue
+            echo ""
+            echo "── Auto-review : $d ──"
+            if python3 .github/scripts/review_plugin.py "$d" > /tmp/review_output.txt 2>&1; then
+              cat /tmp/review_output.txt
+              report+="✅ \`$d\` — OK\n\n"
+            else
+              cat /tmp/review_output.txt
+              all_ok=false
+              report+="❌ \`$d\` — Échec :\n\`\`\`\n$(cat /tmp/review_output.txt)\n\`\`\`\n\n"
+            fi
+          done <<< "$dirs"
+          echo "$report" > /tmp/report.md
+          if $all_ok; then
+            echo "verdict=pass" >> $GITHUB_OUTPUT
+          else
+            echo "verdict=fail" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment + auto-merge si pass
+        uses: actions/github-script@v7
+        env:
+          VERDICT: ${{ steps.review.outputs.verdict }}
+        with:
+          script: |
+            const fs = require('fs')
+            const verdict = process.env.VERDICT || 'skip'
+            let body = '## 🤖 Auto-revue Gungnir Marketplace\n\n'
+            try { body += fs.readFileSync('/tmp/report.md', 'utf8') } catch {}
+            body += `\nVerdict : **${verdict}**\n`
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number, body,
+            })
+            if (verdict === 'pass') {
+              try {
+                await github.rest.pulls.merge({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  pull_number: context.issue.number, merge_method: 'squash',
+                })
+                console.log('Auto-merged ✓')
+              } catch (e) {
+                console.log('Auto-merge failed:', e.message)
+              }
+            }
