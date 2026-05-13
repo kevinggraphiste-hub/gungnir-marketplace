@@ -1,0 +1,19 @@
+{
+  "name": "voice-cartesia",
+  "display_name": "Cartesia Voice",
+  "version": "1.0.0",
+  "author": "ScarletWolf",
+  "description": "TTS streaming Sonic-2 de Cartesia, latence ultra-basse (~75ms). Premium.",
+  "type": "voice",
+  "category": "voice",
+  "tags": ["tts", "streaming", "low-latency", "premium"],
+  "icon": "Mic",
+  "min_gungnir_version": "4.0.0",
+  "permissions": {
+    "secrets": ["cartesia_api_key"],
+    "user_data": ["voice_config"],
+    "filesystem": ["data/plugins_external/voice-cartesia/"],
+    "network_egress": ["api.cartesia.ai", "*.cartesia.ai"],
+    "ui_routes": ["/settings/voice/cartesia"]
+  }
+}

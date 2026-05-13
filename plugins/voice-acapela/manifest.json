@@ -1,0 +1,19 @@
+{
+  "name": "voice-acapela",
+  "display_name": "Stub voice-acapela",
+  "version": "1.0.0",
+  "author": "ScarletWolf",
+  "description": "Plugin seed (stub) — implémentation complète à venir.",
+  "type": "voice",
+  "category": "voice",
+  "tags": ["tts", "stub"],
+  "icon": "Mic",
+  "min_gungnir_version": "4.0.0",
+  "permissions": {
+    "secrets": ["acapela_api_key"],
+    "user_data": ["voice_config"],
+    "filesystem": ["data/plugins_external/voice-acapela/"],
+    "network_egress": ["*"],
+    "ui_routes": []
+  }
+}

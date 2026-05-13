@@ -1,0 +1,123 @@
+{
+  "_comment": "Catalog officiel Gungnir Marketplace. Format consommé par /api/marketplace/catalog. Voir MARKETPLACE.md (repo Gungnir) pour la doc dev.",
+  "version": "1.0.0",
+  "updated_at": "2026-05-13",
+  "plugins": [
+    {
+      "id": "voice-cartesia",
+      "name": "Cartesia Voice",
+      "version": "1.0.0",
+      "author": "ScarletWolf",
+      "description": "TTS streaming Sonic-2 de Cartesia, latence ultra-basse (~75ms). Premium.",
+      "type": "voice",
+      "category": "voice",
+      "tags": ["tts", "streaming", "low-latency", "premium"],
+      "icon_url": "https://raw.githubusercontent.com/kevinggraphiste-hub/gungnir-marketplace/main/plugins/voice-cartesia/icon.png",
+      "permissions": {
+        "secrets": ["cartesia_api_key"],
+        "user_data": ["voice_config"],
+        "filesystem": ["data/plugins_external/voice-cartesia/"],
+        "network_egress": ["api.cartesia.ai", "*.cartesia.ai"],
+        "ui_routes": ["/settings/voice/cartesia"]
+      },
+      "verified": true,
+      "premium": true,
+      "min_gungnir_version": "4.0.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-cartesia/voice-cartesia-1.0.0.tar.gz"
+    },
+    {
+      "id": "voice-hume",
+      "name": "Hume EVI Voice",
+      "version": "1.0.0",
+      "author": "ScarletWolf",
+      "description": "TTS expressif Hume EVI (Empathic Voice Interface) avec détection émotion.",
+      "type": "voice",
+      "category": "voice",
+      "tags": ["tts", "expressive", "emotion", "premium"],
+      "permissions": {
+        "secrets": ["hume_api_key"],
+        "user_data": ["voice_config"],
+        "filesystem": ["data/plugins_external/voice-hume/"],
+        "network_egress": ["api.hume.ai", "*.hume.ai"],
+        "ui_routes": ["/settings/voice/hume"]
+      },
+      "verified": true,
+      "premium": true,
+      "min_gungnir_version": "4.0.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-hume/voice-hume-1.0.0.tar.gz"
+    },
+    {
+      "id": "voice-voxa",
+      "name": "Voxa TTS (FR souverain)",
+      "version": "1.0.0",
+      "author": "ScarletWolf",
+      "description": "Voix françaises Voxa, premium souverain 🇫🇷. Idéal pour usage pro français.",
+      "type": "voice",
+      "category": "voice",
+      "tags": ["tts", "fr", "souverain", "eu"],
+      "permissions": {
+        "secrets": ["voxa_api_key"],
+        "user_data": ["voice_config"],
+        "filesystem": ["data/plugins_external/voice-voxa/"],
+        "network_egress": ["api.voxa.fr", "*.voxa.fr"],
+        "ui_routes": ["/settings/voice/voxa"]
+      },
+      "verified": true,
+      "premium": true,
+      "min_gungnir_version": "4.0.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-voxa/voice-voxa-1.0.0.tar.gz"
+    },
+    {
+      "id": "voice-acapela",
+      "name": "Acapela TTS",
+      "version": "1.0.0",
+      "author": "ScarletWolf",
+      "description": "Voix Acapela (FR/BE) multilingues, qualité haut de gamme. Souverain EU 🇪🇺.",
+      "type": "voice",
+      "category": "voice",
+      "tags": ["tts", "fr", "be", "souverain", "eu"],
+      "permissions": {
+        "secrets": ["acapela_api_key"],
+        "user_data": ["voice_config"],
+        "filesystem": ["data/plugins_external/voice-acapela/"],
+        "network_egress": ["api.acapela-vaas.com", "*.acapela-vaas.com"],
+        "ui_routes": ["/settings/voice/acapela"]
+      },
+      "verified": true,
+      "premium": true,
+      "min_gungnir_version": "4.0.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-acapela/voice-acapela-1.0.0.tar.gz"
+    },
+    {
+      "id": "voice-speechmatics",
+      "name": "Speechmatics STT",
+      "version": "1.0.0",
+      "author": "ScarletWolf",
+      "description": "STT Speechmatics, top qualité multilingue, streaming temps réel. Souverain UK 🇬🇧/EU.",
+      "type": "voice",
+      "category": "voice",
+      "tags": ["stt", "uk", "souverain", "streaming"],
+      "permissions": {
+        "secrets": ["speechmatics_api_key"],
+        "user_data": ["voice_config"],
+        "filesystem": ["data/plugins_external/voice-speechmatics/"],
+        "network_egress": ["asr.api.speechmatics.com", "*.speechmatics.com"],
+        "ui_routes": ["/settings/voice/speechmatics"]
+      },
+      "verified": true,
+      "premium": true,
+      "min_gungnir_version": "4.0.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-speechmatics/voice-speechmatics-1.0.0.tar.gz"
+    }
+  ]
+}
