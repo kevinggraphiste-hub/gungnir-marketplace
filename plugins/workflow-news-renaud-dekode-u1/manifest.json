@@ -1,0 +1,44 @@
+{
+  "name": "workflow-news-renaud-dekode-u1",
+  "display_name": "News Renaud Dekode",
+  "version": "1.0.0",
+  "author": "user:1",
+  "author_pubkey": "e3d34226d3bbfeb57b71acb88b30b6bc3651023423ed6b49502f028153e8935e",
+  "description": "Vérifie le flux RSS du Substack de Renaud Dekode toutes les 30 min. Si un nouvel article est détecté, met à jour le GUID stocké et envoie une notification Telegram.",
+  "type": "workflow",
+  "category": "workflow",
+  "tags": [
+    "news",
+    "substack",
+    "renaud-dekode",
+    "telegram",
+    "monitoring"
+  ],
+  "icon": "Workflow",
+  "min_gungnir_version": "4.3.0",
+  "workflow": {
+    "entry": "workflow.yaml",
+    "trigger_hint": "",
+    "tools_required": [
+      "channel_send",
+      "forge_get_global",
+      "forge_set_global",
+      "http_request",
+      "llm_call",
+      "llm_extract"
+    ],
+    "plugins_required": [],
+    "inputs_schema": {}
+  },
+  "permissions": {
+    "secrets": [],
+    "user_data": [
+      "forge_workflows"
+    ],
+    "filesystem": [],
+    "network_egress": [
+      "renauddekode.substack.com"
+    ],
+    "llm_calls": true
+  }
+}
