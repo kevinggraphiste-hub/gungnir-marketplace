@@ -38,11 +38,18 @@ jobs:
 
       - name: Detect changed plugin dirs
         id: changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUM: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
         run: |
-          base="${{ github.event.pull_request.base.sha }}"
-          head="${{ github.event.pull_request.head.sha }}"
-          dirs=$(git diff --name-only "$base" "$head" -- 'plugins/*/manifest.json' 'plugins/*/workflow.yaml' 'plugins/*/signature.bin' 'plugins/*/routes.py' \
-                  | awk -F/ '{print $1"/"$2}' | sort -u)
+          # Plus fiable que `git diff base..head` qui demande de fetch les
+          # deux refs côté runner (et qui échouait silencieusement même avec
+          # fetch-depth: 0). L'API GitHub donne directement la liste des
+          # fichiers du PR, déjà calculée côté serveur.
+          dirs=$(gh api "/repos/$REPO/pulls/$PR_NUM/files" --paginate --jq '.[].filename' \
+                  | grep -E '^plugins/[^/]+/(manifest\.json|workflow\.yaml|signature\.bin|routes\.py)$' \
+                  | awk -F/ '{print $1"/"$2}' | sort -u || true)
           echo "Changed plugin dirs:"
           echo "$dirs"
           echo "dirs<<EOF" >> $GITHUB_OUTPUT
