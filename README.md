@@ -50,15 +50,14 @@ gungnir-marketplace/
 
 ## Plugins seeds inclus
 
-| Plugin | Type | Provider | Souverain |
+| Plugin | Type | Provider | Statut |
 |---|---|---|---|
-| `voice-cartesia` | TTS streaming basse latence | Cartesia (US) | ❌ |
-| `voice-hume` | TTS expressif émotion | Hume EVI (US) | ❌ |
-| `voice-voxa` | TTS FR premium | Voxa (FR) | ✅ |
-| `voice-acapela` | TTS FR/BE multilingue | Acapela (BE) | ✅ |
-| `voice-speechmatics` | STT pro multilingue | Speechmatics (UK) | ✅ |
+| `voice-cartesia` | TTS streaming basse latence | Cartesia (US) | ✅ Production-ready |
 
-Tous les plugins seeds sont **stubs minimaux** — ils déclarent leurs
-permissions et exposent un endpoint test, mais l'intégration complète
-avec les APIs respectives reste à compléter par leur auteur respectif
-ou par ScarletWolf après partenariat.
+**RÈGLE STRICTE** : tout plugin publié sur la marketplace **DOIT** être
+pleinement fonctionnel et testable par un utilisateur final. Pas de
+stubs, pas de placeholders, pas de "à compléter".
+
+Les plugins en cours de développement (Hume, Voxa, Acapela, Speechmatics)
+sont temporairement retirés du catalog publié — ils reviendront quand
+leur intégration aura été complétée et testée bout-en-bout.
