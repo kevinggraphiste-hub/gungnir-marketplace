@@ -1,0 +1,45 @@
+{
+  "name": "workflow-marketplace-smoke-test-uTEST",
+  "display_name": "Smoke test marketplace",
+  "version": "1.0.0",
+  "author": "user:TEST",
+  "author_pubkey": "6b1530f20596be661e1c401851d62e6c157e9e0a6f1ef4eb3ea6ae4c0911d022",
+  "description": "Workflow de test pour valider le flow Marketplace → Soumettre. Fetch + résume une URL via LLM. À supprimer après test.",
+  "type": "workflow",
+  "category": "test",
+  "tags": [
+    "test",
+    "smoke",
+    "demo"
+  ],
+  "icon": "FlaskConical",
+  "min_gungnir_version": "4.4.0",
+  "workflow": {
+    "entry": "workflow.yaml",
+    "trigger_hint": "Test manuel uniquement — ne pas configurer en cron",
+    "tools_required": [
+      "web_fetch",
+      "llm_call"
+    ],
+    "plugins_required": [],
+    "inputs_schema": {
+      "url": {
+        "type": "string",
+        "default": "https://example.com",
+        "description": "URL à fetch et résumer"
+      }
+    }
+  },
+  "permissions": {
+    "secrets": [],
+    "user_data": [
+      "forge_workflows"
+    ],
+    "filesystem": [],
+    "network_egress": [
+      "example.com",
+      "*.example.com"
+    ],
+    "llm_calls": true
+  }
+}
