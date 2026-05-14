@@ -1,0 +1,22 @@
+name: Smoke test marketplace
+description: Workflow de test du flow marketplace submit (upload via UI).
+
+inputs:
+  url:
+    type: string
+    default: https://example.com
+    description: URL à fetch + résumer
+
+steps:
+  - id: fetch
+    tool: web_fetch
+    args:
+      url: "{{ inputs.url }}"
+      max_chars: 1000
+
+  - id: summarize
+    tool: llm_call
+    args:
+      system: "Tu es un assistant qui résume des pages web en 3 phrases."
+      prompt: "Voici le contenu de {{ inputs.url }} :\n\n{{ steps.fetch.text }}\n\nRésume en 3 phrases."
+      max_tokens: 300
