@@ -1,7 +1,7 @@
 {
   "_comment": "Catalog officiel Gungnir Marketplace. Format consommé par /api/marketplace/catalog. Voir MARKETPLACE.md (repo Gungnir) pour la doc dev. RÈGLE STRICTE : tout plugin publié ici DOIT être pleinement fonctionnel — pas de stubs, pas de placeholders. Les plugins en cours de dev restent dans deploy/marketplace-seeds/ du repo Gungnir non publié, et passent dans ce catalog uniquement après QA.",
-  "version": "1.4.0",
-  "updated_at": "2026-05-14",
+  "version": "1.5.0",
+  "updated_at": "2026-05-16",
   "plugins": [
     {
       "id": "voice-cartesia",
@@ -109,54 +109,6 @@
       "downloads": 0,
       "rating": null,
       "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-speechmatics/voice-speechmatics-1.0.0.tar.gz"
-    },
-    {
-      "id": "workflow-news-renaud-dekode-u1",
-      "name": "News Renaud Dekode",
-      "version": "1.0.0",
-      "author": "user:1",
-      "author_pubkey": "e3d34226d3bbfeb57b71acb88b30b6bc3651023423ed6b49502f028153e8935e",
-      "description": "Vérifie le flux RSS du Substack de Renaud Dekode toutes les 30 min. Si un nouvel article est détecté, met à jour le GUID stocké et envoie une notification Telegram.",
-      "type": "workflow",
-      "category": "workflow",
-      "tags": [
-        "news",
-        "substack",
-        "renaud-dekode",
-        "telegram",
-        "monitoring"
-      ],
-      "permissions": {
-        "secrets": [],
-        "user_data": [
-          "forge_workflows"
-        ],
-        "filesystem": [],
-        "network_egress": [
-          "renauddekode.substack.com"
-        ],
-        "llm_calls": true
-      },
-      "workflow": {
-        "entry": "workflow.yaml",
-        "trigger_hint": "",
-        "tools_required": [
-          "channel_send",
-          "forge_get_global",
-          "forge_set_global",
-          "http_request",
-          "llm_call",
-          "llm_extract"
-        ],
-        "plugins_required": [],
-        "inputs_schema": {}
-      },
-      "verified": false,
-      "premium": false,
-      "min_gungnir_version": "4.3.0",
-      "downloads": 0,
-      "rating": null,
-      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/workflow-news-renaud-dekode-u1/workflow-news-renaud-dekode-u1-1.0.0.tar.gz"
     },
     {
       "id": "workflow-marketplace-smoke-test-uTEST",
