@@ -1,0 +1,11 @@
+{
+  "revoked": [
+    {
+      "plugin_id": "workflow-news-renaud-dekode-u1",
+      "version": "1.0.0",
+      "reason": "Spam / qualité insuffisante / contenu malveillant",
+      "revoked_at": "2026-05-16T09:55:57.507293Z"
+    }
+  ],
+  "updated_at": "2026-05-16T09:55:57.641240Z"
+}
