@@ -1,6 +1,6 @@
 {
   "_comment": "Catalog officiel Gungnir Marketplace. Format consommé par /api/marketplace/catalog. Voir MARKETPLACE.md (repo Gungnir) pour la doc dev. RÈGLE STRICTE : tout plugin publié ici DOIT être pleinement fonctionnel — pas de stubs, pas de placeholders. Les plugins en cours de dev restent dans deploy/marketplace-seeds/ du repo Gungnir non publié, et passent dans ce catalog uniquement après QA.",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "updated_at": "2026-05-16",
   "plugins": [
     {
