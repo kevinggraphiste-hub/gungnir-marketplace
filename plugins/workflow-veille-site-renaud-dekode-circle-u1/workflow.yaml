@@ -1,0 +1,36 @@
+name: "Veille Site Renaud Dekode (Circle)"
+description: "Veille du site/communaute Renaud Dekode (sitemap Circle). PREREQUIS : creez dans l'onglet Variables 'telegram_channel_id' et 'telegram_chat_id'. Aucun secret n'est stocke dans ce workflow."
+steps:
+  - id: fetch_sitemap
+    tool: http_request
+    args:
+      url: https://renaud-dekode.fr/sitemap.xml
+      method: GET
+      max_chars: 20000
+  - id: lastmod
+    tool: regex_match
+    args:
+      text: '{{ steps.fetch_sitemap.text }}'
+      pattern: '<lastmod>\s*([\s\S]*?)\s*</lastmod>'
+  - id: check_last
+    tool: forge_get_global
+    continue_on_error: true
+    args:
+      key: renaud_site_last_lastmod
+  - id: save_last
+    tool: forge_set_global
+    if: "{{ steps.lastmod.matched }} and '{{ steps.lastmod.groups.0 }}' != '{{ steps.check_last.value }}'"
+    args:
+      key: renaud_site_last_lastmod
+      value: '{{ steps.lastmod.groups.0 }}'
+  - id: send_telegram
+    tool: channel_send
+    if: "{{ steps.lastmod.matched }} and '{{ steps.lastmod.groups.0 }}' != '{{ steps.check_last.value }}'"
+    args:
+      channel_id: '{{ globals.telegram_channel_id }}'
+      chat_id: '{{ globals.telegram_chat_id }}'
+      message: |-
+        Le site / communaute Renaud Dekode a ete mis a jour.
+
+        (sitemap renaud-dekode.fr regenere : {{ steps.lastmod.groups.0 }})
+        https://www.renaud-dekode.fr/
