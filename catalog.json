@@ -1,6 +1,6 @@
 {
   "_comment": "Catalog officiel Gungnir Marketplace. Format consommé par /api/marketplace/catalog. Voir MARKETPLACE.md (repo Gungnir) pour la doc dev. RÈGLE STRICTE : tout plugin publié ici DOIT être pleinement fonctionnel — pas de stubs, pas de placeholders. Les plugins en cours de dev restent dans deploy/marketplace-seeds/ du repo Gungnir non publié, et passent dans ce catalog uniquement après QA.",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "updated_at": "2026-05-16",
   "plugins": [
     {
@@ -109,56 +109,6 @@
       "downloads": 0,
       "rating": null,
       "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-speechmatics/voice-speechmatics-1.0.0.tar.gz"
-    },
-    {
-      "id": "workflow-marketplace-smoke-test-uTEST",
-      "name": "Smoke test marketplace",
-      "version": "1.0.0",
-      "author": "user:TEST",
-      "author_pubkey": "6b1530f20596be661e1c401851d62e6c157e9e0a6f1ef4eb3ea6ae4c0911d022",
-      "author_gh_handle": "a32bfd95f415587889e1a0e221b6fb4a9a8ec55dd18d1542af64f466e21c48cf",
-      "description": "Workflow de test pour valider le flow Marketplace → Soumettre. Fetch + résume une URL via LLM. À supprimer après test.",
-      "type": "workflow",
-      "category": "test",
-      "tags": [
-        "test",
-        "smoke",
-        "demo"
-      ],
-      "permissions": {
-        "secrets": [],
-        "user_data": [
-          "forge_workflows"
-        ],
-        "filesystem": [],
-        "network_egress": [
-          "example.com",
-          "*.example.com"
-        ],
-        "llm_calls": true
-      },
-      "workflow": {
-        "entry": "workflow.yaml",
-        "trigger_hint": "Test manuel uniquement — ne pas configurer en cron",
-        "tools_required": [
-          "web_fetch",
-          "llm_call"
-        ],
-        "plugins_required": [],
-        "inputs_schema": {
-          "url": {
-            "type": "string",
-            "default": "https://example.com",
-            "description": "URL à fetch et résumer"
-          }
-        }
-      },
-      "verified": false,
-      "premium": false,
-      "min_gungnir_version": "4.4.0",
-      "downloads": 0,
-      "rating": null,
-      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/workflow-marketplace-smoke-test-uTEST/workflow-marketplace-smoke-test-uTEST-1.0.0.tar.gz"
     }
   ]
 }
