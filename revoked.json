@@ -1,17 +1,17 @@
 {
   "revoked": [
     {
-      "plugin_id": "workflow-news-renaud-dekode-u1",
-      "version": "1.0.0",
-      "reason": "Spam / qualité insuffisante / contenu malveillant",
-      "revoked_at": "2026-05-16T09:55:57.507293Z"
-    },
-    {
       "plugin_id": "workflow-marketplace-smoke-test-uTEST",
       "version": "1.0.0",
       "reason": "Spam / qualité insuffisante / contenu malveillant",
       "revoked_at": "2026-05-16T09:56:13.292681Z"
+    },
+    {
+      "plugin_id": "workflow-news-renaud-dekode-u1",
+      "version": "1.0.0",
+      "reason": "non fonctionnel ",
+      "revoked_at": "2026-05-16T09:56:43.088613Z"
     }
   ],
-  "updated_at": "2026-05-16T09:56:13.472790Z"
+  "updated_at": "2026-05-16T09:56:43.249534Z"
 }
