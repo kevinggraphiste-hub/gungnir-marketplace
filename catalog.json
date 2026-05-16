@@ -109,6 +109,48 @@
       "downloads": 0,
       "rating": null,
       "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/voice-speechmatics/voice-speechmatics-1.0.0.tar.gz"
+    },
+    {
+      "id": "workflow-veille-site-renaud-dekode-circle-u1",
+      "name": "Veille Site Renaud Dekode (Circle)",
+      "version": "1.0.0",
+      "author": "user:1",
+      "author_pubkey": "e3d34226d3bbfeb57b71acb88b30b6bc3651023423ed6b49502f028153e8935e",
+      "description": "Veille du site/communaute Renaud Dekode (sitemap Circle). PREREQUIS : creez dans l'onglet Variables 'telegram_channel_id' et 'telegram_chat_id'. Aucun secret n'est stocke dans ce workflow.",
+      "type": "workflow",
+      "category": "workflow",
+      "tags": [],
+      "permissions": {
+        "secrets": [],
+        "user_data": [
+          "forge_workflows"
+        ],
+        "filesystem": [],
+        "network_egress": [
+          "renaud-dekode.fr",
+          "www.renaud-dekode.fr"
+        ],
+        "llm_calls": false
+      },
+      "workflow": {
+        "entry": "workflow.yaml",
+        "trigger_hint": "",
+        "tools_required": [
+          "channel_send",
+          "forge_get_global",
+          "forge_set_global",
+          "http_request",
+          "regex_match"
+        ],
+        "plugins_required": [],
+        "inputs_schema": {}
+      },
+      "verified": false,
+      "premium": false,
+      "min_gungnir_version": "4.3.0",
+      "downloads": 0,
+      "rating": null,
+      "tarball_url": "https://github.com/kevinggraphiste-hub/gungnir-marketplace/raw/main/plugins/workflow-veille-site-renaud-dekode-circle-u1/workflow-veille-site-renaud-dekode-circle-u1-1.0.0.tar.gz"
     }
   ]
 }
